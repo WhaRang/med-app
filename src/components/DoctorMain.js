@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function DoctorMain() {
 
     const { token, tokenHandler } = useContext(UserContext);
-    const [patientData, setPatientData] = useState({ name: "", paesel: "" });
+    const [patientData, setPatientData] = useState({ name: "", pesel: "" });
     const [doctorData, setDoctorData] = useState({ name: "", role: "", patients: [] });
 
     const submitHandler = e => {
@@ -64,7 +64,7 @@ function DoctorMain() {
                 </Link>
             ))}
             <Link to={`/login`}>
-                <input type="button" onClick="logOut()" value="Log out" />
+                <input type="button" onClick={logOut()} value="Log out" />
             </Link>
         </form>
     );
