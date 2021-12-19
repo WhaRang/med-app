@@ -10,6 +10,7 @@ function DoctorReview({ match }) {
     const { tokenHandler, token } = useContext(UserContext);
 
     const [doctorReview, setDoctorReview] = useState("");
+    const [aiAnalysisResult, setAiAnalysisResult] = useState("");
     const [patienReviewData, setPatienReviewData] = useState({ id: "", name: "", pesel: "", gender: "", age: "", phoneNumber: "", image: "" });
 
     useEffect(() => {
@@ -17,16 +18,22 @@ function DoctorReview({ match }) {
         setupFakeData();
     }, []);
 
-    const submitHandler = e => {
-        e.preventDefault();
-
-        // send data from textarea to db (doctorReview)
-
-        history.push('/doctor')
+    const logOut = () => {
+        tokenHandler("");
+        history.push('/login');
     }
 
-    const logOut = () => {
-        tokenHandler("")
+    const apply = () => {
+
+        // send doctor review to db (message to patient)
+
+        history.push('/doctor');
+    }
+
+    const analyze = () => {
+
+        // get ai analysis from db
+        setAiAnalysisResult("Obvious signs of pneumonia");
     }
 
     // const data (to remove)
@@ -54,35 +61,33 @@ function DoctorReview({ match }) {
     }
 
     return (
-        <form onSubmit={submitHandler}>
+        <div>
             <h3>Name: {patienReviewData.name}</h3>
             <h3>PESEL: {patienReviewData.pesel}</h3>
             <h3>Gender: {patienReviewData.gender}</h3>
             <h3>Age: {patienReviewData.age}</h3>
             <h3>PhoneNumber: {patienReviewData.phoneNumber}</h3>
             <div>
-                <img src={patienReviewData.image}/>
+                <img src={patienReviewData.image} />
             </div>
             <div>
-                <input type="button" onClick="analyze()" value="Analyze with AI" />
-                <> Obivous signs of pneumonia</>
+                <input type="button" onClick={analyze} value="Analyze with AI" />
+                <>{aiAnalysisResult}</>
             </div>
             <div>
                 <textarea rows="4" cols="50">
                 </textarea>
             </div>
             <div>
-                <input type="submit" value="Apply" />
+                <input type="button" onClick={apply} value="Apply" />
                 <Link to={`/doctor`}>
                     <input type="button" value="Close" />
                 </Link>
             </div>
             <div>
-                <Link to={`/login`}>
-                    <input type="button" onClick="logOut()" value="Log out" />
-                </Link>
+                <input type="button" onClick={logOut} value="Log out" />
             </div>
-        </form>
+        </div>
     );
 }
 

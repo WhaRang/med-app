@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../App';
 import '../App.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function PatientMain() {
 
@@ -9,8 +9,11 @@ function PatientMain() {
     const [patientData, setPatientData] = useState({ name: "", massages: [] });
     const [messageData, setMessageData] = useState({ from: "", when: "" });
 
+    const history = useHistory();
+
     const logOut = () => {
-        tokenHandler("")
+        tokenHandler("");
+        history.push('/login');
     }
 
     useEffect(() => {
@@ -50,7 +53,7 @@ function PatientMain() {
         <div>
             <h1>Analysis results: </h1>
             <Link to={`/login`}>
-                <button onClick="logOut()">Log out</button>
+                <button onClick={logOut}>Log out</button>
             </Link>
         </div>
     );

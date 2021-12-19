@@ -9,7 +9,7 @@ function Login() {
 
   const history = useHistory();
 
-  const { tokenHandler } = useContext(UserContext);
+  const { token, tokenHandler } = useContext(UserContext);
 
   const [details, setDetails] = useState({ email: "", password: "" });
   const [user, setUser] = useState({ name: "", email: "", role: "" });
@@ -64,12 +64,12 @@ function Login() {
 
   return (
     <form onSubmit={submitHandler}>
-      <h1>Login</h1>
-      <div calssName="form-group">
+      <h1>Login {token}</h1>
+      <div className="form-group">
         <label htmlFor="email">Login: </label>
         <input type="email" onChange={e => setDetails({ ...details, email: e.target.value })} value={details.email} />
       </div>
-      <div calssName="form-group">
+      <div className="form-group">
         <label htmlFor="password">Password: </label>
         <input type="password" onChange={e => setDetails({ ...details, password: e.target.value })} value={details.password} />
       </div>

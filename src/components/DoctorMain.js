@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../App';
 import '../App.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function DoctorMain() {
 
@@ -9,9 +9,7 @@ function DoctorMain() {
     const [patientData, setPatientData] = useState({ name: "", pesel: "" });
     const [doctorData, setDoctorData] = useState({ name: "", role: "", patients: [] });
 
-    const submitHandler = e => {
-        e.preventDefault();
-    }
+    const history = useHistory();
 
     useEffect(() => {
         // fetch
@@ -19,7 +17,8 @@ function DoctorMain() {
     }, [token]);
 
     const logOut = () => {
-        tokenHandler("")
+        tokenHandler("");
+        history.push('/login');
     }
 
     // const data (to remove)
@@ -55,7 +54,7 @@ function DoctorMain() {
     }
 
     return (
-        <form onSubmit={submitHandler}>
+        <div>
             <h1>{doctorData.name}: {doctorData.role}</h1>
             <h1>Patients: {token}</h1>
             {doctorData.patients.map(patient => (
@@ -63,10 +62,8 @@ function DoctorMain() {
                     <h2>{patient.name}</h2>
                 </Link>
             ))}
-            <Link to={`/login`}>
-                <input type="button" onClick={logOut()} value="Log out" />
-            </Link>
-        </form>
+            <button onClick={logOut}>Log out</button>
+        </div>
     );
 }
 
