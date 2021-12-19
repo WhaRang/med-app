@@ -6,6 +6,7 @@ import SignUp from './components/SignUp';
 import DoctorMain from './components/DoctorMain'
 import PatientMain from './components/PatientMain';
 import DoctorReview from './components/DoctorReview';
+import PatientMessage from "./components/PatientMessage"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 export const UserContext = React.createContext()
@@ -29,6 +30,7 @@ function App() {
             <Route path="/doctor" exact component={DoctorMain} />
             <Route path="/doctor/:id" component={DoctorReview} />
             <Route path="/patient" exact component={PatientMain} />
+            <Route path="/patient/:id" component={PatientMessage} />
           </Switch>
         </div>
       </Router>

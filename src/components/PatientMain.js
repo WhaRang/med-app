@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 function PatientMain() {
 
     const { token, tokenHandler } = useContext(UserContext);
-    const [patientData, setPatientData] = useState({ name: "", massages: [] });
+    const [patientData, setPatientData] = useState({ name: "", patientMessages: [] });
     const [messageData, setMessageData] = useState({ from: "", when: "" });
 
     const history = useHistory();
@@ -25,7 +25,7 @@ function PatientMain() {
     const setupFakeData = () => {
         setPatientData({
             name: authorizedPatientData.name,
-            massages: authorizedPatientData.messages
+            patientMessages: authorizedPatientData.messages
         });
     }
 
@@ -51,7 +51,13 @@ function PatientMain() {
 
     return (
         <div>
+            <h1>{patientData.name}: patient</h1>
             <h1>Analysis results: </h1>
+            {patientData.patientMessages.map(message => (
+                <Link to={`/patient/${message.id}`}>
+                    <h2>{message.from}</h2>
+                </Link>
+            ))}
             <Link to={`/login`}>
                 <button onClick={logOut}>Log out</button>
             </Link>
