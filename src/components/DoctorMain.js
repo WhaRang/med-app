@@ -8,17 +8,23 @@ function DoctorMain() {
     const { token, tokenHandler } = useContext(UserContext);
     const [patientData, setPatientData] = useState({ name: "", pesel: "" });
     const [doctorData, setDoctorData] = useState({ name: "", role: "", patients: [] });
+    const [filteredPatiens, setFilteredPatients] = useState([]);
+    const [searchData, setSearchData] = useState("");
 
     const history = useHistory();
 
     useEffect(() => {
         // fetch
         setupFakeData();
-    }, [token]);
+    }, []);
 
     const logOut = () => {
         tokenHandler("");
         history.push('/login');
+    }
+
+    const search = () => {
+        setFilteredPatients(doctorData.patients.filter(x => x.name.toUpperCase().includes(searchData.toUpperCase())));
     }
 
     // const data (to remove)
@@ -28,6 +34,7 @@ function DoctorMain() {
             role: authorizedDoctorData.role,
             patients: authorizedDoctorData.patients
         });
+        setFilteredPatients(authorizedDoctorData.patients);
     }
 
     // const data (to remove)
@@ -56,9 +63,13 @@ function DoctorMain() {
     return (
         <div>
             <h1>{doctorData.name}: {doctorData.role}</h1>
-            <h1>Patients: {token}</h1>
-            {doctorData.patients.map(patient => (
-                <Link to={`/doctor/${patient.id}`}>
+            <h1>Patients:</h1>
+            <div>
+                <input type="text" onChange={(e) => setSearchData(e.target.value)} />
+                <button onClick={search}>Search</button>
+            </div>
+            {filteredPatiens.map(patient => (
+                <Link to={`/doctor/${patient.id}`} key={patient.id}>
                     <h2>{patient.name}</h2>
                 </Link>
             ))}

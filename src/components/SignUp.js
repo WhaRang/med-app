@@ -35,7 +35,7 @@ function SignUp() {
         <input type="submit" value="Sign Up"/>
       </Link>
       <Link to='/login'>
-        <input type="submit" value="Cancel"/>
+        <input type="submit" value="Cancel"/> 
       </Link>
     </div>
   );
