@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import DoctorMain from './DoctorMain';
 import { UserContext } from '../App';
 import PatientMain from './PatientMain';
+import { Button, Col, Container, Row, Form } from 'react-bootstrap';
 
 function Login() {
 
@@ -63,21 +64,40 @@ function Login() {
   }
 
   return (
-    <form onSubmit={submitHandler}>
-      <h1>Login {token}</h1>
-      <div className="form-group">
-        <label htmlFor="email">Login: </label>
-        <input type="email" onChange={e => setDetails({ ...details, email: e.target.value })} value={details.email} />
-      </div>
-      <div className="form-group">
-        <label htmlFor="password">Password: </label>
-        <input type="password" onChange={e => setDetails({ ...details, password: e.target.value })} value={details.password} />
-      </div>
-      <Link to={`/signup`}>
-        <input type="button" value="Sign Up" />
-      </Link>
-      <input type="submit" value="Sign In" />
-    </form>
+    <>
+      <Container>
+        <h1 className="shadow-sm text-success mt-5 p-3 text-left rounded">Med App</h1>
+        <Row className="mt-5">
+          <Col lg={5} md={6} sm={12} className="p-5 m-auto shadow-sm rounded-lg">
+            <Form>
+              <Form.Group className="text-left" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" onChange={e => setDetails({ ...details, email: e.target.value })} value={details.email} />
+              </Form.Group>
+
+              <Form.Group className="text-left" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" onChange={e => setDetails({ ...details, password: e.target.value })} value={details.password} />
+              </Form.Group>
+
+              <Row className="mt-4">
+                <div>
+                    <Link to={`/signup`}>
+                      <Button className="btn-primary-spacing" variant="success btn-block" type="submit">
+                        Sign Up
+                      </Button>
+                    </Link>
+                  <Button className="btn-primary-spacing" variant="success btn-block" type="submit" onClick={submitHandler}>
+                    Login
+                  </Button>
+                </div>
+              </Row>
+            </Form>
+          </Col>          
+        </Row>        
+        <h6 className="mt-5 p-5 text-center text-secondary ">Copyright © 2021 Dominik Kurowski, Aliaksei Tokarau. All Rights Reserved.</h6>
+      </Container>
+    </>
   );
 }
 

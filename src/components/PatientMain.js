@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../App';
 import '../App.css';
 import { Link, useHistory } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 function PatientMain() {
 
@@ -56,7 +57,7 @@ function PatientMain() {
             <h1>Analysis results: </h1>
             <div>
                 <input type="text" onChange={(e) => setSearchData(e.target.value)} />
-                <button onClick={search}>Search</button>
+                <Button onClick={search}>Search</Button>
             </div>
             {filteredMessages.map(message => (
                 <Link to={`/patient/${message.id}`} key={message.id}> 
@@ -64,7 +65,7 @@ function PatientMain() {
                 </Link>
             ))}
             <Link to={`/login`}>
-                <button onClick={logOut}>Log out</button>
+                <Button onClick={logOut}>Log out</Button>
             </Link>
         </div>
     );

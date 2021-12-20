@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../App';
 import '../App.css';
 import { Link, useHistory } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 function PatientMessage() {
 
@@ -56,9 +57,9 @@ function PatientMessage() {
                 {doctorReviewData.review}
             </div>
             <div>
-                <input type="button" onClick={logOut} value="Log out" />
+                <Button onClick={logOut}>Log out</Button>
                 <Link to={`/patient`}>
-                    <input type="button" value="Close" />
+                    <Button>Close</Button>
                 </Link>
             </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../App';
 import '../App.css';
 import { Link, useHistory } from 'react-router-dom';
+import { Button, Col, Container, Row, Form } from 'react-bootstrap';
 
 function DoctorReview({ match }) {
 
@@ -12,6 +13,7 @@ function DoctorReview({ match }) {
     const [doctorReview, setDoctorReview] = useState("");
     const [aiAnalysisResult, setAiAnalysisResult] = useState("");
     const [patientReviewData, setPatientReviewData] = useState({ id: "", name: "", pesel: "", gender: "", age: "", phoneNumber: "", image: "" });
+    const [doctorData, setDoctorData] = useState({ name: "", role: "" });
 
     useEffect(() => {
         // fetch
@@ -37,6 +39,12 @@ function DoctorReview({ match }) {
     }
 
     // const data (to remove)
+    const authorizedDoctorData = {
+        name: "Marcin Lewnicki",
+        role: "Doctor"
+    }
+
+    // const data (to remove)
     const samplePatient = {
         id: "1",
         name: "Alex Flex",
@@ -49,6 +57,10 @@ function DoctorReview({ match }) {
 
     // const data (to remove)
     const setupFakeData = () => {
+        setDoctorData({
+            name: authorizedDoctorData.name,
+            role: authorizedDoctorData.role
+        });
         setPatientReviewData({
             id: samplePatient.id,
             name: samplePatient.name,
@@ -61,33 +73,45 @@ function DoctorReview({ match }) {
     }
 
     return (
-        <div>
-            <h3>Name: {patientReviewData.name}</h3>
-            <h3>PESEL: {patientReviewData.pesel}</h3>
-            <h3>Gender: {patientReviewData.gender}</h3>
-            <h3>Age: {patientReviewData.age}</h3>
-            <h3>Phone number: {patientReviewData.phoneNumber}</h3>
-            <div>
-                <img src={patientReviewData.image} />
-            </div>
-            <div>
-                <input type="button" onClick={analyze} value="Analyze with AI" />
-                <>{aiAnalysisResult}</>
-            </div>
-            <div>
-                <textarea rows="4" cols="50">
-                </textarea>
-            </div>
-            <div>
-                <input type="button" onClick={apply} value="Apply" />
-                <Link to={`/doctor`}>
-                    <input type="button" value="Close" />
-                </Link>
-            </div>
-            <div>
-                <input type="button" onClick={logOut} value="Log out" />
-            </div>
-        </div>
+        <>
+            <Container>
+                <h1 className="shadow-sm text-success mt-5 p-3 text-center rounded">Med App</h1>
+                <Row className="mt-5">
+                    <Col lg={3} md={5} sm={12} className="p-5 mt-6 m-auto shadow-sm rounded-lg">
+                        <h4 className="mt-5">{doctorData.name}</h4>
+                        <h6 >{doctorData.role}</h6>
+                        <Button className="mt-5" variant="success btn-block" onClick={logOut}>Log out</Button>
+                    </Col>
+                    <Col lg={5} md={6} sm={12} className="p-5 m-auto shadow-sm rounded-lg">
+                        <div>
+                            <img alt="Crop" style={{ maxWidth: '100%' }} src={patientReviewData.image} />
+                            <h6 className="mt-4">{aiAnalysisResult}</h6>
+                            <Button className="mt-4" variant="success btn-block" onClick={analyze}>Analyze with AI</Button>
+                        </div>
+                    </Col>
+                    <Col lg={4} md={6} sm={12} className="p-5 m-auto shadow-sm rounded-lg">
+                        <h3>Name: {patientReviewData.name}</h3>
+                        <h3>PESEL: {patientReviewData.pesel}</h3>
+                        <h3>Gender: {patientReviewData.gender}</h3>
+                        <h3>Age: {patientReviewData.age}</h3>
+                        <h3>Phone number: {patientReviewData.phoneNumber}</h3>
+                        <div>
+                            <textarea rows="4" cols="50">
+                            </textarea>
+                        </div>
+                        <div>
+                            <Button onClick={apply}>Apply</Button>
+                            <Link to={`/doctor`}>
+                                <Button>Close</Button>
+                            </Link>
+                        </div>
+                        <div>
+                            <Button onClick={logOut}>Log out</Button>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+        </>
     );
 }
 

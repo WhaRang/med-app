@@ -8,6 +8,7 @@ import PatientMain from './components/PatientMain';
 import DoctorReview from './components/DoctorReview';
 import PatientMessage from "./components/PatientMessage"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const UserContext = React.createContext()
 

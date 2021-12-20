@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../App';
 import '../App.css';
 import { Link, useHistory } from 'react-router-dom';
+import { Button, Col, Container, Row, Form } from 'react-bootstrap';
 
 function DoctorMain() {
 
@@ -61,20 +62,35 @@ function DoctorMain() {
     }
 
     return (
-        <div>
-            <h1>{doctorData.name}: {doctorData.role}</h1>
-            <h1>Patients:</h1>
-            <div>
-                <input type="text" onChange={(e) => setSearchData(e.target.value)} />
-                <button onClick={search}>Search</button>
-            </div>
-            {filteredPatiens.map(patient => (
-                <Link to={`/doctor/${patient.id}`} key={patient.id}>
-                    <h2>{patient.name}</h2>
-                </Link>
-            ))}
-            <button onClick={logOut}>Log out</button>
-        </div>
+        <>
+            <Container>
+                <h1 className="shadow-sm text-success mt-5 p-3 text-center rounded">Med App</h1>
+                <Row className="mt-5">
+                    <Col lg={4} md={10} sm={12} className="p-5 m-auto shadow-sm rounded-lg">
+                        <h4 className="mt-5">{doctorData.name}</h4>
+                        <h6 >{doctorData.role}</h6>
+                        <Button className="mt-5" variant="success btn-block" onClick={logOut}>Log out</Button>
+                    </Col>
+
+                    <Col lg={7} md={6} sm={12} className="p-5 m-auto shadow-sm rounded-lg">
+                        <h3>Patient list</h3>
+                        <Row className="mt-5">
+                            <div>
+                                <input type="text" onChange={(e) => setSearchData(e.target.value)} />
+                                <Button className="btn-primary-spacing" variant="success btn-block" onClick={search}>Search</Button>
+                            </div>
+                        </Row>
+                        {filteredPatiens.map(patient => (
+                            <Link to={`/doctor/${patient.id}`} key={patient.id}>
+                                <Col lg={5} className="p-1 m-auto shadow-sm rounded-lg">
+                                    <h4>{patient.name}</h4>
+                                </Col>
+                            </Link>
+                        ))}
+                    </Col>
+                </Row>
+            </Container>
+        </>
     );
 }
 
