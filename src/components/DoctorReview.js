@@ -90,23 +90,20 @@ function DoctorReview({ match }) {
                         </div>
                     </Col>
                     <Col lg={4} md={6} sm={12} className="p-5 m-auto shadow-sm rounded-lg">
-                        <h3>Name: {patientReviewData.name}</h3>
-                        <h3>PESEL: {patientReviewData.pesel}</h3>
-                        <h3>Gender: {patientReviewData.gender}</h3>
-                        <h3>Age: {patientReviewData.age}</h3>
-                        <h3>Phone number: {patientReviewData.phoneNumber}</h3>
-                        <div>
-                            <textarea rows="4" cols="50">
+                        <h5>Name: {patientReviewData.name}</h5>
+                        <h5>PESEL: {patientReviewData.pesel}</h5>
+                        <h5>Gender: {patientReviewData.gender}</h5>
+                        <h5>Age: {patientReviewData.age}</h5>
+                        <h5>Phone number: {patientReviewData.phoneNumber}</h5>
+                        <div className="mt-4">
+                            <textarea rows="10" cols="50">
                             </textarea>
                         </div>
-                        <div>
-                            <Button onClick={apply}>Apply</Button>
+                        <div className="mt-3">
+                            <Button className="btn-primary-spacing" variant="success btn-block" onClick={apply}>Apply</Button>
                             <Link to={`/doctor`}>
-                                <Button>Close</Button>
+                                <Button className="btn-primary-spacing" variant="success btn-block">Close</Button>
                             </Link>
-                        </div>
-                        <div>
-                            <Button onClick={logOut}>Log out</Button>
                         </div>
                     </Col>
                 </Row>
